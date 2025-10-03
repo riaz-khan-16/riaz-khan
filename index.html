@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riaz Khan | Portfolio</title>
+  <style>
+    /* === Reset & Base === */
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    a {color: #38bdf8; text-decoration: none;}
+    h1,h2,h3 {font-weight: 600;}
+
+    /* === Navbar === */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: rgba(15,23,42,0.95);
+      backdrop-filter: blur(6px);
+      padding: 1rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    nav h1 {font-size: 1.5rem; color: #38bdf8; letter-spacing: 1px;}
+    nav ul {display: flex; gap: 1.5rem; list-style: none;}
+    nav ul li a {transition: 0.3s;}
+    nav ul li a:hover {color: #facc15;}
+
+    /* === Sections === */
+    section {
+      min-height: 100vh; padding: 7rem 3rem 3rem;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      opacity: 0; transform: translateY(40px);
+      transition: all 1s ease;
+    }
+    section.visible {opacity: 1; transform: translateY(0);}
+    section h2 {font-size: 2.2rem; margin-bottom: 1.5rem; color: #38bdf8; text-transform: uppercase;}
+
+    /* === Home Section === */
+    #home {
+      background: linear-gradient(135deg, #0ea5e9, #0f172a, #1e293b);
+      background-size: 300% 300%;
+      animation: gradientShift 10s ease infinite;
+      color: #f8fafc;
+      text-align: center;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+    }
+    @keyframes gradientShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    #home h2 {
+      font-size: 3rem; font-weight: 700;
+      color: #facc15; text-shadow: 0 0 15px rgba(250,204,21,0.8);
+      margin-bottom: 1rem;
+    }
+    #home p {font-size: 1.3rem; color: #e2e8f0; margin-bottom: 2rem;}
+    #home .btn {
+      padding: 1rem 2rem; background: #38bdf8;
+      border-radius: 30px; color: #0f172a; font-size: 1.1rem; font-weight: bold;
+      transition: all 0.3s; box-shadow: 0 5px 15px rgba(56,189,248,0.4);
+    }
+    #home .btn:hover {background: #0ea5e9; color: #fff; transform: scale(1.1);}
+
+    /* === About Section === */
+    #about {background: linear-gradient(135deg, #1e293b, #0f172a);}
+    .about-container {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem; max-width: 1000px;
+      background: rgba(15,23,42,0.9); border-radius: 20px;
+      padding: 2rem; box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    }
+    .about-container img {
+      width: 100%; border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    .about-text {display: flex; flex-direction: column; justify-content: center; text-align: left;}
+    .about-text h2 {font-size: 2rem; color: #38bdf8; margin-bottom: 1rem;}
+    .about-text p {color: #cbd5e1; line-height: 1.8; font-size: 1.05rem;}
+
+    /* === Skills === */
+    #skills {background: linear-gradient(135deg,#0ea5e9,#0f172a);}
+    .skills-container {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+      gap: 1rem; max-width: 900px;
+    }
+    .skill {
+      padding: 1rem; border-radius: 10px; font-weight: bold;
+      background: #0f172a; transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    .skill:hover {background:#38bdf8; color:#0f172a; transform: scale(1.1);}
+
+    /* === Experience === */
+    #experience {background: linear-gradient(135deg,#1e293b,#334155);}
+    .experience-item {
+      background: rgba(15,23,42,0.8); padding: 1.2rem; border-radius: 10px;
+      margin: 1rem 0; max-width: 800px; text-align: left;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5); transition:0.3s;
+    }
+    .experience-item:hover {transform: translateX(5px);}
+    .experience-item h3 {color: #facc15;}
+    .experience-item span {display:block; font-size: 0.9rem; color: #cbd5e1;}
+
+    /* === Education === */
+    #education {background: linear-gradient(135deg,#0f172a,#0ea5e9);}
+    .edu-item {
+      background: rgba(15,23,42,0.8); padding: 1rem; border-radius: 10px;
+      margin: 1rem 0; max-width: 800px; text-align: left;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    .edu-item h3 {color: #38bdf8;}
+
+    /* === Publications === */
+    #publications {background: linear-gradient(135deg,#0f172a,#475569);}
+    .pub-list {max-width: 900px; text-align: left;}
+    .pub-item {
+      margin: 1rem 0; padding: 1rem; border-left: 4px solid #38bdf8;
+      background: rgba(15,23,42,0.8); border-radius: 8px; transition:0.3s;
+    }
+    .pub-item:hover {background:#0ea5e9; color:#0f172a;}
+
+    /* === Achievements === */
+    #achievements {background: linear-gradient(135deg,#0f172a,#1e293b);}
+    .achievements-container {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 1rem; max-width: 900px;
+    }
+    .achievement {
+      background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 10px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.4); transition:0.3s;
+    }
+    .achievement:hover {background:linear-gradient(145deg,#38bdf8,#facc15); color:#0f172a;}
+
+    /* === Projects === */
+    #projects {background: linear-gradient(135deg,#0ea5e9,#0f172a);}
+    .projects-container {max-width: 1000px; width: 100%;}
+    .project {
+      background: rgba(15,23,42,0.9); border-radius: 12px; padding: 1rem;
+      margin: 1rem 0; text-align: left; box-shadow:0 6px 20px rgba(0,0,0,0.4);
+      transition:0.3s;
+    }
+    .project:hover {transform: translateY(-5px); background:#38bdf8; color:#0f172a;}
+    .project h3 {color:#facc15;}
+    .project a {display:inline-block; margin-top:0.5rem; color:#0f172a; font-weight: bold;}
+
+    /* === Contact === */
+    #contact {background: linear-gradient(135deg,#1e293b,#0f172a);}
+    #contact p {font-size: 1.1rem;}
+
+    /* Footer */
+    footer {background:#0f172a; padding:1rem; text-align:center; color:#64748b;}
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <h1>Riaz Khan</h1>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Home -->
+  <section id="home" class="visible">
+    <h2>Hello, I'm Riaz Khan</h2>
+    <p>AI Developer | Researcher | Backend Enthusiast</p>
+    <a href="#projects" class="btn">View My Work</a>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="about-container">
+      <img src="https://via.placeholder.com/400x400" alt="Profile Picture">
+      <div class="about-text">
+        <h2>About Me</h2>
+        <p>I am a Software Engineer (AI) with expertise in Machine Learning, Deep Learning, NLP, and Backend Development. 
+           With experience as an AI Developer and Research Assistant, I focus on building intelligent, scalable, 
+           and impactful solutions. I love combining algorithms with real-world applications, 
+           ranging from healthcare chatbots to power system analysis.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-container">
+      <div class="skill">Python</div>
+      <div class="skill">C++</div>
+      <div class="skill">TensorFlow</div>
+      <div class="skill">PyTorch</div>
+      <div class="skill">LangChain & RAG</div>
+      <div class="skill">OpenCV</div>
+      <div class="skill">Django & Flask</div>
+      <div class="skill">MySQL & PostgreSQL</div>
+      <div class="skill">MongoDB</div>
+      <div class="skill">REST APIs</div>
+      <div class="skill">HTML/CSS/Bootstrap</div>
+      <div class="skill">Git & GitHub</div>
+    </div>
+  </section>
+
+  <!-- Work Experience -->
+  <section id="experience">
+    <h2>Work Experience</h2>
+    <div class="experience-item">
+      <h3>Software Engineer (AI) – MyMedicalHUB</h3>
+      <span>Jan 2024 – Present</span>
+      <p>Designed LLM-based chatbot with LangChain & Django, built video processing pipeline, and automated reporting system with GPT-4.</p>
+    </div>
+    <div class="experience-item">
+      <h3>Research Assistant – Control System Research Group, RUET</h3>
+      <span>Jan 2023 – Dec 2023</span>
+      <p>Developed ML models for transformer health prediction and conducted surveys on smart grids & microgrids.</p>
+    </div>
+    <div class="experience-item">
+      <h3>Mathematics Expert – Photomath</h3>
+      <span>Jan 2022 – Dec 2022</span>
+      <p>Solved 500+ math problems and reviewed 800+ solutions with LaTeX and Figma.</p>
+    </div>
+    <div class="experience-item">
+      <h3>Deep Learning Intern – Gaze</h3>
+      <span>Jun 2018 – Sep 2018</span>
+      <p>Developed a face-recognition-based attendance system integrated with Arduino hardware.</p>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education">
+    <h2>Education</h2>
+    <div class="edu-item">
+      <h3>BSc in Mechatronics Engineering – RUET</h3>
+      <span>Jan 2017 – Oct 2022 | GPA: 3.14/4.0</span>
+      <p>Thesis: Hybrid Machine Learning Model for Health Index Prediction of Power Transformers</p>
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section id="publications">
+    <h2>Publications</h2>
+    <div class="pub-list">
+      <div class="pub-item">“A Deep Generative Model Aided Intelligent Framework for Health Condition Evaluation of High Voltage Power Transformer.” <em>Elsevier, 2023</em>.</div>
+      <div class="pub-item">“Deep Learning Techniques for Transmission Line Fault Diagnosis: A Comparative Evaluation.” <em>IEEE ACMI 2021</em>.</div>
+      <div class="pub-item">“Energy Sustainability—Survey on Technology and Control of Microgrid, Smart Grid and Virtual Power Plant.” <em>IEEE Access 2021</em>.</div>
+    </div>
+  </section>
+
+  <!-- Achievements -->
+  <section id="achievements">
+    <h2>Achievements</h2>
+    <div class="achievements-container">
+      <div class="achievement"><h3>Erasmus Mundus Scholarship</h3><p>Selected for prestigious E-Pico MSc program in Image Processing & AI.</p></div>
+      <div class="achievement"><h3>High Publication Award</h3><p>Recognized by RUET for impactful international research work.</p></div>
+      <div class="achievement"><h3>Scholarships</h3><p>RUET Technical Scholarship, SSC & Primary School Scholarships.</p></div>
+      <div class="achievement"><h3>LeetCode 365 Days Badge</h3><p>Achieved continuous streak for a full year of coding practice.</p></div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-container">
+      <div class="project"><h3>Automatic Email Sender</h3><p>Automates personalized bulk emails to professors for study opportunities.</p><a href="https://github.com/riaz-khan-16/EmailBot" target="_blank">🔗 GitHub</a></div>
+      <div class="project"><h3>HigherEduAssistantApp</h3><p>Django + LangChain app for retrieving MS/PhD info with RAG pipeline.</p><a href="https://github.com/riaz-khan-16/HigherEduAssistantApp" target="_blank">🔗 GitHub</a></div>
+      <div class="project"><h3>Matrimony</h3><p>Django matchmaking web app with chat, profiles, and search features.</p><a href="https://github.com/riaz-khan-16/Matrimony" target="_blank">🔗 GitHub</a></div>
+      <div class="project"><h3>Transformer Life Predictor</h3><p>Autoencoder-based ML model with 97% accuracy for transformer lifespan prediction.</p><a href="https://github.com/riaz-khan-16/HybridAIModel" target="_blank">🔗 GitHub</a></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p>📧 <a href="mailto:riaz.khan.ruet@gmail.com">riaz.khan.ruet@gmail.com</a> | 
+       🌐 <a href="https://github.com/riaz-khan-16" target="_blank">GitHub</a> | 
+       💼 <a href="https://www.linkedin.com/in/riaz-khan-17b236192/" target="_blank">LinkedIn</a>
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Riaz Khan | Built with ❤️</p>
+  </footer>
+
+  <script>
+    // Reveal sections on scroll
+    const sections = document.querySelectorAll("section");
+    const reveal = () => {
+      const trigger = window.innerHeight * 0.8;
+      sections.forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+        if (top < trigger) sec.classList.add("visible");
+      });
+    };
+    window.addEventListener("scroll", reveal);
+    reveal();
+  </script>
+</body>
+</html>
